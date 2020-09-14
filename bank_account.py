@@ -8,22 +8,46 @@
 #  return the amount withdrawn, for convenience
 
 class BankAccount():
-    def __init__(self, kind):
+    def __init__(self, kind, pin):
         self.kind = kind
         self.balance = 0
         self.fees = 0
-
-    def balance(self):
-        self.amount = self.balance
+        self.pin = pin
 
     def deposit(self, amount):
         self.balance += amount
 
-    def withdraw(self, amount):
-         self.balance -= amount
-         if (self.balance < 0):
-            self.fees += 69
-         return amount
+    def withdraw(self, amount, pin_from_user):
 
-hank_bank = BankAccount(100)
-print(hank_bank.balance())
+        if (self.pin == pin_from_user):
+
+              if (self.balance < amount):
+                print("sorry yr too broke")
+                return
+              elif (self.balance == amount):
+                self.balance -= amount
+                print(f"yr at zero, be careful")
+              else:
+                self.balance -= amount
+                print(f"current balance is {self.balance}")
+        else:
+            print("the pin you have entered is incorrect")
+
+    def change_pin(self, pin):
+        self.pin = pin
+        print(f"your new pin is {self.pin}")
+
+
+
+
+han_bank = BankAccount("checking", 69)
+print("my new account is a {} account".format(han_bank.kind))
+
+han_bank.deposit(69000)
+print("my current balance is ${}".format(han_bank.balance))
+
+han_bank.withdraw(690000, 698)
+print("my current balance is ${}".format(han_bank.balance))
+
+han_bank.change_pin(6978)
+
